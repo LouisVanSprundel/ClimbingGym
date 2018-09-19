@@ -8,22 +8,24 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./single-gym.component.css']
 })
 export class SingleGymComponent implements OnInit {
-  @Input() gymName: string;
-  @Input() gymPlace: string;
-  @Input() gymComment: string;
-  @Input() index: number;
-  @Input() id: number;
   @Input() name: string;
   @Input() place: string;
   @Input() comment: string;
-
-  constructor(private gymsSevice: GymsService, private route: ActivatedRoute) { }
+  @Input() modifyId: string;
+  id: number;
+  constructor(private gymsSevice: GymsService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.name = this.gymsSevice.getGymById(+id).name;
-    this.place = this.gymsSevice.getGymById(+id).place;
-    this.comment = this.gymsSevice.getGymById(+id).comment;
+    this.id = + this.route.snapshot.params['id'];
+    this.modifyId = '/modify/' + (this.id);
+    this.name = this.gymsSevice.getGymById(this.id).name;
+    this.place = this.gymsSevice.getGymById(this.id).place;
+    this.comment = this.gymsSevice.getGymById(this.id).comment;
   }
 
+  deleteGym() {
+      this.gymsSevice.deleteGym(this.id);
+  }
 }
+
+

@@ -2,5 +2,6 @@
   <h1>{{ name }}</h1>
   <h2>{{ place }}</h2>
   <h3>{{ comment}}</h3>
-
-<a routerLink="/gyms">Retour</a>
+  <a [routerLink]="[modifyId]">Modifier</a>
+ <!-- <a role="button" routerLink="/gyms" (click)="deleteGym()" >Supprimer</a>-->
+  <a routerLink="/gyms">Retour</a>

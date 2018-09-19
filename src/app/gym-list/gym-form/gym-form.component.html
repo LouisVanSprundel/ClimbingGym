@@ -1,3 +1,17 @@
-<p>
-  gym-form works!
-</p>
+<div class="col-sm-8 col-sm-offset-2">
+  <form [formGroup]="gymForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="place">Place</label>
+      <input type="text" id="lastName" class="form-control" formControlName="place">
+    </div>
+    <div class="form-group">
+      <label for="comment">Commentaire</label>
+      <input type="text" id="email" class="form-control" formControlName="comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+  </form>
+</div>

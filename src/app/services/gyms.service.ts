@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import {Gym} from '../models/gym.model';
 
 @Injectable()
 export class GymsService {
-  gyms = [
+  gymSubject = new Subject<any[]>();
+  private gyms: Gym[] = [
     {
-      id: 1,
+      id: 0,
       name: 'Block Out',
       place: 'Paris',
       comment: 'Première'
     },
     {
-      id: 2,
+      id: 1,
       name: 'BlocBuster',
       place: 'Courbevoie',
       comment: 'Deuxième'
     },
-    { id: 3,
+    { id: 2,
       name: 'AntreBloc',
       place: 'Ville-Juif',
       comment: 'Troisième'
@@ -30,5 +33,24 @@ export class GymsService {
       }
     );
     return gyms;
+  }
+
+  emitGymsSubject() {
+    this.gymSubject.next(this.gyms.slice());
+  }
+
+  addGyms(gym: Gym) {
+    this.gyms.push(gym);
+    this.emitGymsSubject();
+  }
+
+  modifyGyms(gym: Gym) {
+    this.gyms.splice(gym.id, 1, gym);
+    this.emitGymsSubject();
+  }
+
+  deleteGym(id: number) {
+    this.gyms.splice(id, 1);
+    this.emitGymsSubject();
   }
 }
