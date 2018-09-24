@@ -27,9 +27,12 @@ export class GymListComponent implements OnInit, OnDestroy {
         this.gyms = gyms;
       }
     );
-    this.gymsService.emitGymsSubject();
+    this.gymsService.getGymsFromServer();
   }
 
+  onSave() {
+    this.gymsService.saveGymsToServer();
+  }
 
   ngOnDestroy() {
     this.gymsSubscription.unsubscribe();

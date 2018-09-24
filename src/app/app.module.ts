@@ -15,6 +15,7 @@ import {AuthService} from './services/auth.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'gyms', canActivate: [AuthGuardService], component: GymListComponent},
@@ -24,7 +25,7 @@ const appRoutes: Routes = [
   { path: 'modify/:id', canActivate: [AuthGuardService], component: GymFormComponent},
   { path: 'auth', component: SigninComponent},
   { path: 'not-found', component: FourOhFourComponent },
-  //{ path: '**', redirectTo: 'not-found' }
+  { path: '**', redirectTo: 'not-found' }
 ]
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [GymsService, AuthService, AuthGuardService],

@@ -2,18 +2,9 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>Liste des salles d'escalade</h2>
-    <!--  <ul class="list-group">-->
-      <!--  <app-single-gym *ngFor="let gym of gyms; let i = index"
-                         [gymName]="gym.name"
-                         [gymPlace]="gym.place"
-                         [gymComment]="gym.comment"
-                         [index]="i"
-                         [id]="gym.id"></app-single-gym>-->
-        <h3 class="list-group-item"*ngFor="let gym of gyms; let i = index">
+        <h3 class="list-group-item"*ngFor="let gym of gyms">
           <a [routerLink]="[gym.id]">{{ gym.name }}</a>
         </h3>
-
-      <!--</ul>-->
     </div>
   </div>
 </div>

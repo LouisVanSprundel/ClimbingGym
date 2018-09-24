@@ -60,7 +60,14 @@ export class GymFormComponent implements OnInit, OnDestroy {
     } else {
       this.gymsService.modifyGyms(gym);
     }
-    this.router.navigate(['/gyms']);
+    this.gymsService.saveGymsToServer().subscribe(() => {
+        console.log('Enregistrement terminé !');
+        this.router.navigate(['/gyms']);
+      },
+      (error) => {
+        console.log('Erreur ! : ' + error);
+      },
+    );
   }
 
   ngOnDestroy() {
