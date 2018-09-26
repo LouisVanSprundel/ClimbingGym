@@ -15,7 +15,12 @@ import {AuthService} from './services/auth.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
+
 
 const appRoutes: Routes = [
   { path: 'gyms', canActivate: [AuthGuardService], component: GymListComponent},
@@ -23,7 +28,8 @@ const appRoutes: Routes = [
   { path: 'gyms/:id', canActivate: [AuthGuardService], component: SingleGymComponent},
   { path: 'new', canActivate: [AuthGuardService], component: GymFormComponent},
   { path: 'modify/:id', canActivate: [AuthGuardService], component: GymFormComponent},
-  { path: 'auth', component: SigninComponent},
+  { path: 'login', component: SigninComponent},
+  { path: 'register', component: SignupComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
 ]
@@ -42,7 +48,10 @@ const appRoutes: Routes = [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [GymsService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
