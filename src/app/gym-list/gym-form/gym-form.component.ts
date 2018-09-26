@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GymsService} from '../../services/gyms.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Gym} from '../../models/gym.model';
@@ -34,14 +34,14 @@ export class GymFormComponent implements OnInit, OnDestroy {
   initForm() {
     if ( this.id == null) {
       this.gymForm = this.formBuilder.group({
-        name: '',
-        place: '',
+        name: ['', Validators.required],
+        place: ['', Validators.required],
         comment: ''
       });
     } else {
         this.gymForm = this.formBuilder.group({
-          name: this.gyms[this.id].name,
-          place: this.gyms[this.id].place,
+          name: [this.gyms[this.id].name, Validators.required],
+          place: [this.gyms[this.id].place, Validators.required],
           comment: this.gyms[this.id].comment
       });
     }
