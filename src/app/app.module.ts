@@ -27,7 +27,8 @@ const appRoutes: Routes = [
   { path: 'gyms/:id', canActivate: [AuthGuardService], component: SingleGymComponent},
   { path: 'new', canActivate: [AuthGuardService], component: GymFormComponent},
   { path: 'modify/:id', canActivate: [AuthGuardService], component: GymFormComponent},
-  { path: 'auth', component: SigninComponent},
+  { path: 'login', component: SigninComponent},
+  { path: 'register', component: SignupComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
 ]
