@@ -32,6 +32,7 @@ export class AuthService {
       this.afAuth.auth
         .signInWithPopup(provider)
         .then(res => {
+          this.isAuth = true;
           resolve(res);
           console.log('Facebook connexion ok');
         }, err => {
@@ -49,6 +50,7 @@ export class AuthService {
       this.afAuth.auth
         .signInWithPopup(provider)
         .then(res => {
+          this.isAuth = true;
           resolve(res);
           console.log('Google connexion ok');
         }, err => {
@@ -68,6 +70,27 @@ export class AuthService {
           reject(err);
           console.log('Error in creating account' + err);
         });
+    });
+  }
+  doLogin(value) {
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+        .then(res => {
+          this.isAuth = true;
+          resolve(res);
+        }, err => reject(err));
+    });
+  }
+
+  doLogout() {
+    return new Promise((resolve, reject) => {
+      if (firebase.auth().currentUser) {
+        this.afAuth.auth.signOut();
+        this.isAuth = false;
+        resolve();
+      } else {
+        reject();
+      }
     });
   }
 

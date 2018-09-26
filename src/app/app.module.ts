@@ -24,7 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'gyms', canActivate: [AuthGuardService], component: GymListComponent},
-  { path: '', redirectTo: 'gyms', pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'gyms/:id', canActivate: [AuthGuardService], component: SingleGymComponent},
   { path: 'new', canActivate: [AuthGuardService], component: GymFormComponent},
   { path: 'modify/:id', canActivate: [AuthGuardService], component: GymFormComponent},

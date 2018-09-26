@@ -27,10 +27,12 @@ export class SigninComponent implements OnInit {
     });
   }
   onSubmitForm() {
-    this.authService.doRegister(this.loginForm.value)
+    this.authService.doLogin(this.loginForm.value)
       .then(res => {
         console.log(res);
         this.errorMessage = '';
+        this.authStatus = this.authService.isAuth;
+        this.router.navigate(['gyms']);
       }, err => {
         console.log(err);
         this.errorMessage = err.message;
@@ -38,15 +40,17 @@ export class SigninComponent implements OnInit {
   }
   tryFacebookLogin() {
     this.authService.doFacebookLogin()
-      .then(res =>{
-          this.router.navigate(['/gym']);
+      .then(res => {
+        this.authStatus = this.authService.isAuth;
+        this.router.navigate(['gyms']);
         }, err => console.log(err)
       );
   }
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
-      .then(res =>{
-          this.router.navigate(['/gym']);
+      .then(res => {
+        this.authStatus = this.authService.isAuth;
+          this.router.navigate(['gyms']);
         }, err => console.log(err)
       );
   }
@@ -59,6 +63,7 @@ export class SigninComponent implements OnInit {
     );
   }
   onSignOut() {
+    this.authService.doLogout();
     this.authService.signOut();
     this.authStatus = this.authService.isAuth;
   }
